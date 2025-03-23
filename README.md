@@ -30,8 +30,8 @@ A modern web application that helps users create professional resumes with AI as
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd resume-builder
+git clone https://github.com/RahimjonovBoburjon/AI-Resume-Builder.git
+cd AI-Resume-Builder
 ```
 
 2. Install dependencies:
