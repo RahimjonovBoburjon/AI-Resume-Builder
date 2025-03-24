@@ -89,6 +89,7 @@
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { auth } from '../firebase/firebase';
+import { useToast } from '../composables/useToast';
 import { 
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword,
@@ -98,6 +99,7 @@ import {
 } from 'firebase/auth';
 
 const router = useRouter();
+const { success, error } = useToast();
 const email = ref('');
 const password = ref('');
 const isLogin = ref(true);
@@ -127,13 +129,27 @@ const handleSubmit = async () => {
 
     if (isLogin.value) {
       await signInWithEmailAndPassword(auth, email.value, password.value);
+      success('Successfully signed in!');
     } else {
       await createUserWithEmailAndPassword(auth, email.value, password.value);
+      success('Account created successfully!');
     }
     router.push('/dashboard');
   } catch (error) {
     console.error('Authentication error:', error);
-    alert(error.message);
+    const errorMessage = error.code === 'auth/email-already-in-use' 
+      ? 'This email is already registered'
+      : error.code === 'auth/invalid-email'
+      ? 'Invalid email address'
+      : error.code === 'auth/weak-password'
+      ? 'Password should be at least 6 characters'
+      : error.code === 'auth/wrong-password'
+      ? 'Incorrect password'
+      : error.code === 'auth/user-not-found'
+      ? 'No account found with this email'
+      : 'An error occurred. Please try again.';
+    
+    error(errorMessage);
   }
 };
 </script> 

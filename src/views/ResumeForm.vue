@@ -107,8 +107,10 @@ import { useRouter } from 'vue-router';
 import { db } from '../firebase/firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { auth } from '../firebase/firebase';
+import { useToast } from '../composables/useToast';
 
 const router = useRouter();
+const { success, error } = useToast();
 const formData = ref({
   fullName: '',
   email: '',
@@ -131,12 +133,14 @@ const handleSubmit = async () => {
     try {
       experienceData = JSON.parse(formData.value.experience);
     } catch (e) {
-      throw new Error('Invalid experience JSON format');
+      error('Invalid experience JSON format');
+      return;
     }
     try {
       educationData = JSON.parse(formData.value.education);
     } catch (e) {
-      throw new Error('Invalid education JSON format');
+      error('Invalid education JSON format');
+      return;
     }
 
     const resumeData = {
@@ -150,11 +154,11 @@ const handleSubmit = async () => {
 
     const docRef = await addDoc(collection(db, 'resumes'), resumeData);
     console.log('Resume saved with ID:', docRef.id);
-    
+    success('Resume saved successfully!');
     router.push('/resume-preview');
   } catch (error) {
     console.error('Error saving resume:', error);
-    alert(error.message || 'Error saving resume. Please check your input format.');
+    error('Error saving resume. Please check your input format.');
   }
 };
 </script> 
