@@ -1,59 +1,71 @@
 <template>
-  <div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-    <div class="relative py-3 sm:max-w-4xl sm:mx-auto">
-      <div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
-        <div class="max-w-3xl mx-auto">
-          <div class="divide-y divide-gray-200">
-            <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-              <div class="flex justify-between items-center mb-8">
-                <h2 class="text-2xl font-bold">Resume Preview</h2>
-                <button
-                  @click="downloadPDF"
-                  class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  Download PDF
-                </button>
-              </div>
-
-              <div id="resume-content" class="space-y-6">
-                <div class="text-center">
-                  <h1 class="text-3xl font-bold">{{ resumeData.fullName }}</h1>
-                  <p class="text-gray-600">{{ resumeData.email }} | {{ resumeData.phone }}</p>
+  <div class="min-h-screen bg-gray-50">
+    <Navbar />
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      <div class="px-4 py-6 sm:px-0">
+        <div class="bg-white shadow rounded-lg p-6">
+          <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">Resume Preview</h1>
+            <button
+              @click="downloadPDF"
+              class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Download PDF
+            </button>
+          </div>
+          <div ref="resumeContent" class="prose max-w-none">
+            <div class="divide-y divide-gray-200">
+              <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                <div class="flex justify-between items-center mb-8">
+                  <h2 class="text-2xl font-bold">Resume Preview</h2>
+                  <button
+                    @click="downloadPDF"
+                    class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                    Download PDF
+                  </button>
                 </div>
 
-                <div>
-                  <h2 class="text-xl font-semibold border-b-2 border-gray-300 pb-2">Professional Summary</h2>
-                  <p class="mt-2">{{ resumeData.summary }}</p>
-                </div>
-
-                <div>
-                  <h2 class="text-xl font-semibold border-b-2 border-gray-300 pb-2">Skills</h2>
-                  <div class="mt-2 flex flex-wrap gap-2">
-                    <span
-                      v-for="skill in resumeData.skills"
-                      :key="skill"
-                      class="px-3 py-1 bg-gray-100 rounded-full text-sm"
-                    >
-                      {{ skill }}
-                    </span>
+                <div id="resume-content" class="space-y-6">
+                  <div class="text-center">
+                    <h1 class="text-3xl font-bold">{{ resumeData.fullName }}</h1>
+                    <p class="text-gray-600">{{ resumeData.email }} | {{ resumeData.phone }}</p>
                   </div>
-                </div>
 
-                <div>
-                  <h2 class="text-xl font-semibold border-b-2 border-gray-300 pb-2">Experience</h2>
-                  <div v-for="(exp, index) in resumeData.experience" :key="index" class="mt-4">
-                    <h3 class="font-semibold">{{ exp.title }}</h3>
-                    <p class="text-gray-600">{{ exp.company }} | {{ exp.period }}</p>
-                    <p class="mt-2">{{ exp.description }}</p>
+                  <div>
+                    <h2 class="text-xl font-semibold border-b-2 border-gray-300 pb-2">Professional Summary</h2>
+                    <p class="mt-2">{{ resumeData.summary }}</p>
                   </div>
-                </div>
 
-                <div>
-                  <h2 class="text-xl font-semibold border-b-2 border-gray-300 pb-2">Education</h2>
-                  <div v-for="(edu, index) in resumeData.education" :key="index" class="mt-4">
-                    <h3 class="font-semibold">{{ edu.degree }}</h3>
-                    <p class="text-gray-600">{{ edu.institution }} | {{ edu.period }}</p>
-                    <p class="mt-2">{{ edu.description }}</p>
+                  <div>
+                    <h2 class="text-xl font-semibold border-b-2 border-gray-300 pb-2">Skills</h2>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                      <span
+                        v-for="skill in resumeData.skills"
+                        :key="skill"
+                        class="px-3 py-1 bg-gray-100 rounded-full text-sm"
+                      >
+                        {{ skill }}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h2 class="text-xl font-semibold border-b-2 border-gray-300 pb-2">Experience</h2>
+                    <div v-for="(exp, index) in resumeData.experience" :key="index" class="mt-4">
+                      <h3 class="font-semibold">{{ exp.title }}</h3>
+                      <p class="text-gray-600">{{ exp.company }} | {{ exp.period }}</p>
+                      <p class="mt-2">{{ exp.description }}</p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h2 class="text-xl font-semibold border-b-2 border-gray-300 pb-2">Education</h2>
+                    <div v-for="(edu, index) in resumeData.education" :key="index" class="mt-4">
+                      <h3 class="font-semibold">{{ edu.degree }}</h3>
+                      <p class="text-gray-600">{{ edu.institution }} | {{ edu.period }}</p>
+                      <p class="mt-2">{{ edu.description }}</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -72,6 +84,7 @@ import { db } from '../firebase/firebase';
 import { collection, query, where, orderBy, limit, getDocs } from 'firebase/firestore';
 import { auth } from '../firebase/firebase';
 import html2pdf from 'html2pdf.js';
+import Navbar from '../components/Navbar.vue';
 
 const router = useRouter();
 const resumeData = ref({

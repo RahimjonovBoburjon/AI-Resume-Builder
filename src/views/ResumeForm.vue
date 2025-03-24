@@ -1,100 +1,99 @@
 <template>
-  <div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-    <div class="relative py-3 sm:max-w-xl sm:mx-auto">
-      <div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
-        <div class="max-w-md mx-auto">
-          <div class="divide-y divide-gray-200">
-            <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-              <h2 class="text-2xl font-bold mb-8">Personal Information</h2>
-              <form @submit.prevent="handleSubmit" class="space-y-6">
-                <div>
-                  <label class="block text-sm font-medium text-gray-700">Full Name</label>
-                  <input
-                    v-model="formData.fullName"
-                    type="text"
-                    required
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  />
-                </div>
-
-                <div>
-                  <label class="block text-sm font-medium text-gray-700">Email</label>
-                  <input
-                    v-model="formData.email"
-                    type="email"
-                    required
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  />
-                </div>
-
-                <div>
-                  <label class="block text-sm font-medium text-gray-700">Phone</label>
-                  <input
-                    v-model="formData.phone"
-                    type="tel"
-                    required
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  />
-                </div>
-
-                <div>
-                  <label class="block text-sm font-medium text-gray-700">Professional Summary</label>
-                  <textarea
-                    v-model="formData.summary"
-                    rows="4"
-                    required
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  ></textarea>
-                </div>
-
-                <div>
-                  <label class="block text-sm font-medium text-gray-700">Skills (comma-separated)</label>
-                  <input
-                    v-model="formData.skills"
-                    type="text"
-                    required
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  />
-                </div>
-
-                <div>
-                  <label class="block text-sm font-medium text-gray-700">Experience (JSON format)</label>
-                  <textarea
-                    v-model="formData.experience"
-                    rows="6"
-                    required
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  ></textarea>
-                </div>
-
-                <div>
-                  <label class="block text-sm font-medium text-gray-700">Education (JSON format)</label>
-                  <textarea
-                    v-model="formData.education"
-                    rows="6"
-                    required
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  ></textarea>
-                </div>
-
-                <div class="flex justify-between">
-                  <button
-                    type="button"
-                    @click="$router.push('/dashboard')"
-                    class="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    Generate Resume
-                  </button>
-                </div>
-              </form>
+  <div class="min-h-screen bg-gray-50">
+    <Navbar />
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      <div class="px-4 py-6 sm:px-0">
+        <div class="bg-white shadow rounded-lg p-6">
+          <h1 class="text-2xl font-bold text-gray-900 mb-6">Create Your Resume</h1>
+          <form @submit.prevent="handleSubmit" class="space-y-6">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <div>
+                <label for="fullName" class="block text-sm font-medium text-gray-700">Full Name</label>
+                <input
+                  type="text"
+                  id="fullName"
+                  v-model="formData.fullName"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  required
+                />
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  v-model="formData.email"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  required
+                />
+              </div>
+              <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  v-model="formData.phone"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  required
+                />
+              </div>
+              <div>
+                <label for="skills" class="block text-sm font-medium text-gray-700">Skills (comma-separated)</label>
+                <input
+                  type="text"
+                  id="skills"
+                  v-model="formData.skills"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  placeholder="e.g., JavaScript, Python, React"
+                  required
+                />
+              </div>
             </div>
-          </div>
+
+            <div>
+              <label for="summary" class="block text-sm font-medium text-gray-700">Professional Summary</label>
+              <textarea
+                id="summary"
+                v-model="formData.summary"
+                rows="4"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                required
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="experience" class="block text-sm font-medium text-gray-700">Experience (JSON format)</label>
+              <textarea
+                id="experience"
+                v-model="formData.experience"
+                rows="6"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm font-mono"
+                placeholder='[{"company": "Company Name", "position": "Position", "startDate": "2020-01", "endDate": "2023-01", "description": "Job description"}]'
+                required
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="education" class="block text-sm font-medium text-gray-700">Education (JSON format)</label>
+              <textarea
+                id="education"
+                v-model="formData.education"
+                rows="6"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm font-mono"
+                placeholder='[{"school": "School Name", "degree": "Degree", "startDate": "2016-09", "endDate": "2020-05", "description": "Education description"}]'
+                required
+              ></textarea>
+            </div>
+
+            <div class="flex justify-end">
+              <button
+                type="submit"
+                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Save Resume
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -104,10 +103,10 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { db } from '../firebase/firebase';
 import { collection, addDoc } from 'firebase/firestore';
-import { auth } from '../firebase/firebase';
+import { auth, db } from '../firebase/firebase';
 import { useToast } from '../composables/useToast';
+import Navbar from '../components/Navbar.vue';
 
 const router = useRouter();
 const { success, error } = useToast();
@@ -156,8 +155,8 @@ const handleSubmit = async () => {
     console.log('Resume saved with ID:', docRef.id);
     success('Resume saved successfully!');
     router.push('/resume-preview');
-  } catch (error) {
-    console.error('Error saving resume:', error);
+  } catch (err) {
+    console.error('Error saving resume:', err);
     error('Error saving resume. Please check your input format.');
   }
 };
