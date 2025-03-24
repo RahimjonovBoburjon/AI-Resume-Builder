@@ -14,7 +14,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
-// Initialize Firestore with cache settings
 export const db = initializeFirestore(app, {
   cache: {
     sizeBytes: CACHE_SIZE_UNLIMITED,

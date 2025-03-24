@@ -129,25 +129,38 @@ const handleSubmit = async () => {
 
     if (isLogin.value) {
       await signInWithEmailAndPassword(auth, email.value, password.value);
-      success('Successfully signed in!');
+      success('Signed in successfully!');
     } else {
       await createUserWithEmailAndPassword(auth, email.value, password.value);
       success('Account created successfully!');
     }
-    router.push('/dashboard');
-  } catch (error) {
-    console.error('Authentication error:', error);
-    const errorMessage = error.code === 'auth/email-already-in-use' 
-      ? 'This email is already registered'
-      : error.code === 'auth/invalid-email'
-      ? 'Invalid email address'
-      : error.code === 'auth/weak-password'
-      ? 'Password should be at least 6 characters'
-      : error.code === 'auth/wrong-password'
-      ? 'Incorrect password'
-      : error.code === 'auth/user-not-found'
-      ? 'No account found with this email'
-      : 'An error occurred. Please try again.';
+    router.push('/resume-form');
+  } catch (err) {
+    console.error('Authentication error:', err);
+    let errorMessage = 'An error occurred during authentication.';
+    
+    switch (err.code) {
+      case 'auth/email-already-in-use':
+        errorMessage = 'This email is already registered';
+        break;
+      case 'auth/invalid-email':
+        errorMessage = 'Invalid email address';
+        break;
+      case 'auth/weak-password':
+        errorMessage = 'Password should be at least 6 characters';
+        break;
+      case 'auth/user-not-found':
+        errorMessage = 'No account found with this email';
+        break;
+      case 'auth/wrong-password':
+        errorMessage = 'Incorrect password';
+        break;
+      case 'auth/invalid-credential':
+        errorMessage = 'Invalid email or password';
+        break;
+      default:
+        errorMessage = err.message || 'An error occurred during authentication.';
+    }
     
     error(errorMessage);
   }
