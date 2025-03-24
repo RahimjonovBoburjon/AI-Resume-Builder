@@ -35,6 +35,20 @@
             </div>
           </div>
 
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <input
+                id="remember-me"
+                v-model="rememberMe"
+                type="checkbox"
+                class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+              />
+              <label for="remember-me" class="ml-2 block text-sm text-gray-900">
+                Remember me
+              </label>
+            </div>
+          </div>
+
           <div>
             <button
               type="submit"
@@ -72,18 +86,30 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { auth } from '../firebase/firebase';
 import { 
   createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword 
+  signInWithEmailAndPassword,
+  setPersistence,
+  browserLocalPersistence,
+  browserSessionPersistence
 } from 'firebase/auth';
 
 const router = useRouter();
 const email = ref('');
 const password = ref('');
 const isLogin = ref(true);
+const rememberMe = ref(false);
+
+onMounted(() => {
+  const storedEmail = localStorage.getItem('rememberedEmail');
+  if (storedEmail) {
+    email.value = storedEmail;
+    rememberMe.value = true;
+  }
+});
 
 const toggleMode = () => {
   isLogin.value = !isLogin.value;
@@ -91,6 +117,14 @@ const toggleMode = () => {
 
 const handleSubmit = async () => {
   try {
+    if (rememberMe.value) {
+      localStorage.setItem('rememberedEmail', email.value);
+      await setPersistence(auth, browserLocalPersistence);
+    } else {
+      localStorage.removeItem('rememberedEmail');
+      await setPersistence(auth, browserSessionPersistence);
+    }
+
     if (isLogin.value) {
       await signInWithEmailAndPassword(auth, email.value, password.value);
     } else {

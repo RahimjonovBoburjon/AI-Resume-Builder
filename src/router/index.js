@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { auth } from '../firebase/firebase';
+import { isAuthenticated } from '../utils/auth';
 
 const routes = [
   {
@@ -40,11 +41,11 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   const requiresGuest = to.matched.some(record => record.meta.requiresGuest);
-  const isAuthenticated = await auth.currentUser;
+  const isAuth = isAuthenticated();
 
-  if (requiresAuth && !isAuthenticated) {
+  if (requiresAuth && !isAuth) {
     next('/auth');
-  } else if (requiresGuest && isAuthenticated) {
+  } else if (requiresGuest && isAuth) {
     next('/dashboard');
   } else {
     next();
