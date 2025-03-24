@@ -9,10 +9,8 @@
             </div>
           </div>
           <div class="flex items-center">
-            <button
-              @click="handleSignOut"
-              class="ml-4 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
+            <button @click="handleSignOut"
+              class="ml-4 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               Sign out
             </button>
           </div>
@@ -32,10 +30,8 @@
             </p>
             <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
               <div class="rounded-md shadow">
-                <router-link
-                  to="/resume-form"
-                  class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
-                >
+                <router-link to="/resume-form"
+                  class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
                   Create New Resume
                 </router-link>
               </div>
@@ -62,4 +58,4 @@ const handleSignOut = async () => {
     console.error('Sign out error:', error);
   }
 };
-</script> 
+</script>

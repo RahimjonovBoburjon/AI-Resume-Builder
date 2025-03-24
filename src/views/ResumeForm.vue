@@ -9,87 +9,56 @@
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
                 <label for="fullName" class="block text-sm font-medium text-gray-700">Full Name</label>
-                <input
-                  type="text"
-                  id="fullName"
-                  v-model="formData.fullName"
+                <input type="text" id="fullName" v-model="formData.fullName"
                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  required
-                />
+                  required />
               </div>
               <div>
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  v-model="formData.email"
+                <input type="email" id="email" v-model="formData.email"
                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  required
-                />
+                  required />
               </div>
               <div>
                 <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  v-model="formData.phone"
+                <input type="tel" id="phone" v-model="formData.phone"
                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  required
-                />
+                  required />
               </div>
               <div>
                 <label for="skills" class="block text-sm font-medium text-gray-700">Skills (comma-separated)</label>
-                <input
-                  type="text"
-                  id="skills"
-                  v-model="formData.skills"
+                <input type="text" id="skills" v-model="formData.skills"
                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  placeholder="e.g., JavaScript, Python, React"
-                  required
-                />
+                  placeholder="e.g., JavaScript, Python, React" required />
               </div>
             </div>
 
             <div>
               <label for="summary" class="block text-sm font-medium text-gray-700">Professional Summary</label>
-              <textarea
-                id="summary"
-                v-model="formData.summary"
-                rows="4"
+              <textarea id="summary" v-model="formData.summary" rows="4"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                required
-              ></textarea>
+                required></textarea>
             </div>
 
             <div>
               <label for="experience" class="block text-sm font-medium text-gray-700">Experience (JSON format)</label>
-              <textarea
-                id="experience"
-                v-model="formData.experience"
-                rows="6"
+              <textarea id="experience" v-model="formData.experience" rows="6"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm font-mono"
                 placeholder='[{"company": "Company Name", "position": "Position", "startDate": "2020-01", "endDate": "2023-01", "description": "Job description"}]'
-                required
-              ></textarea>
+                required></textarea>
             </div>
 
             <div>
               <label for="education" class="block text-sm font-medium text-gray-700">Education (JSON format)</label>
-              <textarea
-                id="education"
-                v-model="formData.education"
-                rows="6"
+              <textarea id="education" v-model="formData.education" rows="6"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm font-mono"
                 placeholder='[{"school": "School Name", "degree": "Degree", "startDate": "2016-09", "endDate": "2020-05", "description": "Education description"}]'
-                required
-              ></textarea>
+                required></textarea>
             </div>
 
             <div class="flex justify-end">
-              <button
-                type="submit"
-                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
+              <button type="submit"
+                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Save Resume
               </button>
             </div>
@@ -160,4 +129,4 @@ const handleSubmit = async () => {
     error('Error saving resume. Please check your input format.');
   }
 };
-</script> 
+</script>
