@@ -4,37 +4,65 @@
       <div class="flex justify-between h-16">
         <div class="flex">
           <div class="flex-shrink-0 flex items-center">
-            <router-link to="/" class="text-xl font-bold text-gray-800">
+            <router-link to="/" class="text-2xl font-bold text-indigo-600">
               Resume Builder
             </router-link>
           </div>
           <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-            <router-link to="/resume-form" class="inline-flex items-center px-1 pt-1 border-b-2" :class="[
-              $route.path === '/resume-form'
-                ? 'border-indigo-500 text-gray-900'
-                : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-            ]">
+            <router-link
+              to="/dashboard"
+              class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-indigo-600 transition-colors duration-200"
+              :class="{ 'border-b-2 border-indigo-500': $route.path === '/dashboard' }"
+            >
+              <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+              Dashboard
+            </router-link>
+            <router-link
+              to="/resume-form"
+              class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-indigo-600 transition-colors duration-200"
+              :class="{ 'border-b-2 border-indigo-500': $route.path === '/resume-form' }"
+            >
+              <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
               Create Resume
             </router-link>
-            <router-link to="/resume-preview" class="inline-flex items-center px-1 pt-1 border-b-2" :class="[
-              $route.path === '/resume-preview'
-                ? 'border-indigo-500 text-gray-900'
-                : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-            ]">
+            <router-link
+              to="/resume-preview"
+              class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-indigo-600 transition-colors duration-200"
+              :class="{ 'border-b-2 border-indigo-500': $route.path === '/resume-preview' }"
+            >
+              <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
               Preview
             </router-link>
           </div>
         </div>
-        <div class="hidden sm:ml-6 sm:flex sm:items-center">
-          <div class="ml-3 relative">
-            <div class="flex items-center space-x-4">
-              <span class="text-gray-700">{{ userEmail }}</span>
-              <button @click="handleSignOut"
-                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                Sign Out
-              </button>
-            </div>
-          </div>
+        <div class="flex items-center">
+          <button
+            v-if="isAuthenticated"
+            @click="handleLogout"
+            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            Logout
+          </button>
+          <router-link
+            v-else
+            to="/auth"
+            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+            </svg>
+            Login
+          </router-link>
         </div>
         <div class="-mr-2 flex items-center sm:hidden">
           <button @click="mobileMenuOpen = !mobileMenuOpen"
@@ -80,7 +108,7 @@
             </div>
           </div>
           <div class="mt-3 space-y-1">
-            <button @click="handleSignOut"
+            <button @click="handleLogout"
               class="block w-full text-left px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">
               Sign Out
             </button>
@@ -92,7 +120,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { auth } from '../firebase/firebase';
 import { signOut } from 'firebase/auth';
@@ -101,17 +129,25 @@ import { useToast } from '../composables/useToast';
 const router = useRouter();
 const { success, error } = useToast();
 const mobileMenuOpen = ref(false);
+const isAuthenticated = ref(false);
 
 const userEmail = computed(() => auth.currentUser?.email || '');
 
-const handleSignOut = async () => {
+onMounted(() => {
+  const unsubscribe = auth.onAuthStateChanged((user) => {
+    isAuthenticated.value = !!user;
+  });
+  return () => unsubscribe();
+});
+
+const handleLogout = async () => {
   try {
     await signOut(auth);
-    success('Signed out successfully');
+    success('Logged out successfully');
     router.push('/auth');
   } catch (err) {
-    console.error('Sign out error:', err);
-    error('Error signing out');
+    console.error('Error logging out:', err);
+    error('Error logging out');
   }
 };
 </script>
