@@ -34,6 +34,12 @@ const routes = [
     name: 'ResumePreview',
     component: ResumePreview,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/resume-preview/:id',
+    name: 'ResumePreviewWithId',
+    component: ResumePreview,
+    meta: { requiresAuth: true }
   }
 ];
 
