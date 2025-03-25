@@ -1,6 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { auth } from '../firebase/firebase';
 import { isAuthenticated } from '../utils/auth';
+import Auth from '../views/Auth.vue';
+import ResumeForm from '../views/ResumeForm.vue';
+import ResumePreview from '../views/ResumePreview.vue';
+import Dashboard from '../views/Dashboard.vue';
 
 const routes = [
   {
@@ -10,25 +14,25 @@ const routes = [
   {
     path: '/auth',
     name: 'Auth',
-    component: () => import('../views/Auth.vue'),
+    component: Auth,
     meta: { requiresGuest: true }
   },
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: () => import('../views/Dashboard.vue'),
+    component: Dashboard,
     meta: { requiresAuth: true }
   },
   {
     path: '/resume-form',
     name: 'ResumeForm',
-    component: () => import('../views/ResumeForm.vue'),
+    component: ResumeForm,
     meta: { requiresAuth: true }
   },
   {
     path: '/resume-preview',
     name: 'ResumePreview',
-    component: () => import('../views/ResumePreview.vue'),
+    component: ResumePreview,
     meta: { requiresAuth: true }
   }
 ];
